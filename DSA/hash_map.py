@@ -49,9 +49,51 @@ class HashFunction():
             return self.hash_storage
 
     
-test = HashFunction(3)
-test.set("apple",100)
-test.set("banana",54)
-test.set("orange",20)
-print(test.get("orange"))
-print(test.delete("orange"))
+class HashLinearProbing() :
+
+    def __init__(self,n):
+
+        self.table_size = n
+        self.hash_table = [None]*n
+
+    def get_hash_value(self,key):
+
+        i = 0
+        hash_value = (hash(key)+i) % self.table_size
+
+        while self.hash_table[hash_value] != None:
+
+            i += 1
+
+            if i == len(self.hash_table):
+                raise Exception("Table is full")
+        
+            hash_value = (hash(key)+i) % self.table_size
+
+        return hash_value
+    
+    def add(self,**kwargs):
+
+        for key , value in kwargs.items():
+
+            try:
+                hash_value = self.get_hash_value(key)
+
+            except Exception as e:
+                print(e)
+                break
+
+            if self.hash_table[hash_value] is None:
+                self.hash_table[hash_value] = [key,value] 
+
+    
+                
+
+hashLP = HashLinearProbing(3)
+
+hashLP.add(apple=10,banana=20,orange=40)   
+print(hashLP.hash_table)
+
+
+
+
