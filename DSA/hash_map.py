@@ -87,13 +87,34 @@ class HashLinearProbing() :
                 self.hash_table[hash_value] = [key,value] 
 
     
-                
+    def get(self,key):
+
+        i = 0
+        hash_value = (hash(key)+i) % self.table_size
+
+        while self.hash_table[hash_value] != None and self.hash_table[hash_value][0] != key:
+
+            i+=1
+
+            if i == self.table_size:
+                return "Key Not Found"
+                exit
+            hash_value = (hash(key)+i) % self.table_size
+        
+        if self.hash_table[hash_value] != None and self.hash_table[hash_value][0] == key:
+            return self.hash_table[hash_value][1]
+        
+        return
+
 
 hashLP = HashLinearProbing(3)
 
-hashLP.add(apple=10,banana=20,orange=40)   
+hashLP.add(apple=10,banana=20)   
 print(hashLP.hash_table)
-
+print(hashLP.get("apple"))
+print(hashLP.get("orange"))
+print(hashLP.get("banana"))
+print(hashLP.get("grape"))
 
 
 
