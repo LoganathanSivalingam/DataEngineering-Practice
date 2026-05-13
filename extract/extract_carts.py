@@ -4,5 +4,10 @@ class ExtractCarts(BaseExtractor):
 
     def extract_carts(self):
 
-        return self.base_extractor("carts")
+        try:
+            return self.base_extractor("carts")
+        
+        except Exception as e:
+
+            print(f"Status code: {e}")
 

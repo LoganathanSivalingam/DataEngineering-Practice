@@ -4,5 +4,11 @@ class ExtractUsers(BaseExtractor):
 
     def extract_users(self):
 
-        return self.base_extractor("users")
+         try:
+            return self.base_extractor("users")
+        
+         except Exception as e:
+
+            print(f"Status code: {e}")
+
 

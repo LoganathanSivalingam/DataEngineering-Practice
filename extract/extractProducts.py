@@ -4,5 +4,11 @@ class ExtractProducts(BaseExtractor):
 
     def extract_products(self):
 
-        return self.base_extractor("products")
+          try:
+            return self.base_extractor("products")
+        
+          except Exception as e:
+
+            print(f"Status code: {e}")
+
 
